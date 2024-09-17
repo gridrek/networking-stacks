@@ -1,57 +1,58 @@
 # Table of Contents
 
-1. **Introduction to Networking Stacks**  
-   1.1 Overview of Networking Protocols  
-   1.2 Role of IP, TCP, and UDP in the OSI Model  
+1. [**Introduction to Networking Stacks**](#introduction-to-networking-stacks)  
+   1.1 [Overview of Networking Protocols](#overview-of-networking-protocols)  
+   1.2 [Role of IP, TCP, and UDP in the OSI Model](#role-of-ip-tcp-and-udp-in-the-osi-model)  
 
-2. **Internet Protocol (IP)**  
-   2.1 Overview of the IP Layer  
-      2.1.1 Purpose and Functionality  
-      2.1.2 IPv4 vs. IPv6  
-   2.2 IP Header Structure  
-      2.2.1 Version  
-      2.2.2 Header Length  
-      2.2.3 Total Length  
-      2.2.4 Fragmentation and Identification  
-      2.2.5 Time to Live (TTL)  
-      2.2.6 Protocol Field  
-      2.2.7 Source and Destination Address  
-      2.2.8 Checksum  
-   2.3 IP Addressing and Subnetting  
-      2.3.1 IP Address Classes  
-      2.3.2 Subnet Masks  
-      2.3.3 CIDR Notation  
-   2.4 Routing and Forwarding in IP  
-      2.4.1 Static and Dynamic Routing  
-      2.4.2 Routing Algorithms  
-   2.5 Fragmentation in IP  
-      2.5.1 Need for Fragmentation  
-      2.5.2 Reassembly of Fragments  
+2. [**Internet Protocol (IP)**](#internet-protocol-ip)  
+   2.1 [Overview of the IP Layer](#overview-of-the-ip-layer)  
+      2.1.1 [Purpose and Functionality](#purpose-and-functionality)  
+      2.1.2 [IPv4 vs. IPv6](#ipv4-vs-ipv6)  
+   2.2 [IP Header Structure](#ip-header-structure)  
+      2.2.1 [Version](#version)  
+      2.2.2 [Header Length](#header-length)  
+      2.2.3 [Total Length](#total-length)  
+      2.2.4 [Fragmentation and Identification](#fragmentation-and-identification)  
+      2.2.5 [Time to Live (TTL)](#time-to-live-ttl)  
+      2.2.6 [Protocol Field](#protocol-field)  
+      2.2.7 [Source and Destination Address](#source-and-destination-address)  
+      2.2.8 [Checksum](#checksum)  
+   2.3 [IP Addressing and Subnetting](#ip-addressing-and-subnetting)  
+      2.3.1 [IP Address Classes](#ip-address-classes)  
+      2.3.2 [Subnet Masks](#subnet-masks)  
+      2.3.3 [CIDR Notation](#cidr-notation)  
+   2.4 [Routing and Forwarding in IP](#routing-and-forwarding-in-ip)  
+      2.4.1 [Static and Dynamic Routing](#static-and-dynamic-routing)  
+      2.4.2 [Routing Algorithms](#routing-algorithms)  
+   2.5 [Fragmentation in IP](#fragmentation-in-ip)  
+      2.5.1 [Need for Fragmentation](#need-for-fragmentation)  
+      2.5.2 [Reassembly of Fragments](#reassembly-of-fragments)  
 
-3. **Transmission Control Protocol (TCP)**  
-   3.1 Overview of TCP  
-      3.1.1 Purpose and Characteristics  
-      3.1.2 Connection-Oriented Nature  
-   3.2 TCP Header Structure  
-      3.2.1 Source and Destination Port  
-      3.2.2 Sequence and Acknowledgment Numbers  
-      3.2.3 Data Offset and Reserved Fields  
-      3.2.4 Flags (SYN, ACK, FIN, etc.)  
-      3.2.5 Window Size and Flow Control  
-      3.2.6 Checksum and Error Detection  
-   3.3 TCP Three-Way Handshake  
-      3.3.1 SYN-SYN/ACK-ACK Process  
-      3.3.2 Connection Establishment and Termination  
-   3.4 Flow Control and Congestion Control  
-      3.4.1 Sliding Window Mechanism (Flow Control)  
-      3.4.2 Slow Start, Congestion Avoidance, and Fast Retransmit (Congestion Control)  
-   3.5 Retransmission and Timeout Management  
-      3.5.1 TCP Timers (Retransmission, Time-Wait)  
-      3.5.2 Round Trip Time (RTT) and Retransmission  
-   3.6 Reliable Data Transfer in TCP  
-      3.6.1 Acknowledgment and Sequence Numbers  
-      3.6.2 Error Recovery (Retransmission)  
-   3.7 Use Cases and Applications of TCP  
+3. [**Transmission Control Protocol (TCP)**](#transmission-control-protocol-tcp)  
+   3.1 [Overview of TCP](#overview-of-tcp)  
+      3.1.1 [Purpose and Characteristics](#purpose-and-characteristics)  
+      3.1.2 [Connection-Oriented Nature](#connection-oriented-nature)  
+   3.2 [TCP Header Structure](#tcp-header-structure)  
+      3.2.1 [Source and Destination Port](#source-and-destination-port)  
+      3.2.2 [Sequence and Acknowledgment Numbers](#sequence-and-acknowledgment-numbers)  
+      3.2.3 [Data Offset and Reserved Fields](#data-offset-and-reserved-fields)  
+      3.2.4 [Flags (SYN, ACK, FIN, etc.)](#flags-syn-ack-fin-etc)  
+      3.2.5 [Window Size and Flow Control](#window-size-and-flow-control)  
+      3.2.6 [Checksum and Error Detection](#checksum-and-error-detection)  
+   3.3 [TCP Three-Way Handshake](#tcp-three-way-handshake)  
+      3.3.1 [SYN-SYN/ACK-ACK Process](#syn-synack-ack-process)  
+      3.3.2 [Connection Establishment and Termination](#connection-establishment-and-termination)  
+   3.4 [Flow Control and Congestion Control](#flow-control-and-congestion-control)  
+      3.4.1 [Sliding Window Mechanism (Flow Control)](#sliding-window-mechanism-flow-control)  
+      3.4.2 [Slow Start, Congestion Avoidance, and Fast Retransmit (Congestion Control)](#slow-start-congestion-avoidance-and-fast-retransmit-congestion-control)  
+   3.5 [Retransmission and Timeout Management](#retransmission-and-timeout-management)  
+      3.5.1 [TCP Timers (Retransmission, Time-Wait)](#tcp-timers-retransmission-time-wait)  
+      3.5.2 [Round Trip Time (RTT) and Retransmission](#round-trip-time-rtt-and-retransmission)  
+   3.6 [Reliable Data Transfer in TCP](#reliable-data-transfer-in-tcp)  
+      3.6.1 [Acknowledgment and Sequence Numbers](#acknowledgment-and-sequence-numbers)  
+      3.6.2 [Error Recovery (Retransmission)](#error-recovery-retransmission)  
+   3.7 [Use Cases and Applications of TCP](#use-cases-and-applications-of-tcp)  
+
 
 
 ### 1\. Introduction to Networking Stacks
