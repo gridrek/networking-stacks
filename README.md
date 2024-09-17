@@ -459,11 +459,12 @@ An **/18** subnet mask implies that 18 bits are used for the network portion and
 
 With 14 bits allocated for the host portion, you can calculate the total number of possible addresses in this subnet as:
 
-2 14 \= 16 , 384 2^{14} = 16,384 2 14 \= 16 , 384
+2^14 = 16,384
 
 However, two addresses are reserved (one for the network address and one for the broadcast address), leaving:
 
-16 , 384 − 2 \= 16 , 382  usable IP addresses . 16,384 - 2 = 16,382 \\text{ usable IP addresses}. 16 , 384 − 2 \= 16 , 382  usable IP addresses .
+16,384 - 2 = 16,382 usable IP addresses.
+
 
 #### 2.3.4.2 Network and Host Ranges
 
