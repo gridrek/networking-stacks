@@ -6,7 +6,7 @@
 
 2. **Internet Protocol (IP)**  
     2.1 [Overview of the IP Layer](#overview-of-the-ip-layer)  
-        2.1.1 [Purpose and Functionality](#purpose-and-functionality)  
+          2.1.1 [Purpose and Functionality](#purpose-and-functionality)  
         2.1.2 [IPv4 vs. IPv6](#ipv4-vs-ipv6)  
     2.2 [IP Header Structure](#ip-header-structure)  
         2.2.1 [Version](#version)  
