@@ -411,6 +411,218 @@ CIDR allows network administrators to assign IP address blocks that are more app
 
 * * *
 
+Here’s a deep dive into the analysis of non-standard subnet masks, using `255.255.10.0` as the example:
+
+* * *
+
+### 2.3.4 Deep Dive into Non-Standard Subnet Masks
+
+While typical subnet masks follow a pattern of contiguous 1s followed by contiguous 0s (e.g., `255.255.255.0`, `255.255.0.0`), there are cases where network administrators may encounter non-standard subnet masks, like `255.255.10.0`. This section will explore how to analyze such masks, understand their implications, and the scenarios where they might be applied.
+
+#### 2.3.4.1 Understanding the Subnet Mask `255.255.10.0`
+
+Let’s start by analyzing this non-standard subnet mask. A subnet mask is used to differentiate the network portion from the host portion of an IP address. In most cases, the subnet mask consists of contiguous 1s for the network portion and 0s for the host portion. However, in a mask like `255.255.10.0`, the division is not as clean.
+
+##### Subnet Mask in Binary
+
+The subnet mask `255.255.10.0` can be represented in binary form:
+-----------------------------------------------------------------
+
+*   `255` = `11111111`
+*   `255` = `11111111`
+*   `10` = `00001010`
+*   `0` = `00000000`
+
+Thus, the full binary representation is:
+
+```
+11111111.11111111.00001010.00000000
+```
+
+##### CIDR Notation
+
+To understand the division between the network and host portions, count the number of `1`s in the binary subnet mask:
+---------------------------------------------------------------------------------------------------------------------
+
+*   The first two octets (`11111111.11111111`) consist of 16 bits, all set to 1.
+*   The third octet (`00001010`) starts with 2 `1`s.
+
+In total, there are 18 `1`s in the subnet mask, meaning the network portion uses the first 18 bits. This subnet mask can be written in **CIDR notation** as `/18`.
+
+##### Implications of `/18`
+
+An **/18** subnet mask implies that 18 bits are used for the network portion and the remaining 14 bits are used for the host portion. This breakdown means:
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+*   **Network portion**: The first 18 bits (2 full octets and part of the third).
+*   **Host portion**: The remaining 14 bits (6 bits in the third octet and 8 bits in the fourth octet).
+
+With 14 bits allocated for the host portion, you can calculate the total number of possible addresses in this subnet as:
+
+2 14 \= 16 , 384 2^{14} = 16,384 2 14 \= 16 , 384
+
+However, two addresses are reserved (one for the network address and one for the broadcast address), leaving:
+
+16 , 384 − 2 \= 16 , 382  usable IP addresses . 16,384 - 2 = 16,382 \\text{ usable IP addresses}. 16 , 384 − 2 \= 16 , 382  usable IP addresses .
+
+#### 2.3.4.2 Network and Host Ranges
+
+With the subnet mask `/18` applied to an IP address, let’s consider how the network and host ranges are defined.
+
+For example, assume the network address is `192.168.0.0/18`:
+------------------------------------------------------------
+
+*   **Network portion**: The first 18 bits cover the range `192.168.0.x` through part of `192.168.63.x` (since `63` is the highest value represented by the 6 host bits in the third octet).
+*   **Host portion**: The remaining 14 bits allow addresses from `192.168.0.1` to `192.168.63.254` (subtracting the reserved network and broadcast addresses).
+
+Thus, this `/18` subnet can hold hosts from:
+
+```
+192.168.0.1 - 192.168.63.254
+```
+
+#### 2.3.4.3 Unusual Subnet Masks and Use Cases
+
+A subnet mask like `255.255.10.0` deviates from the standard practice of using subnet masks like `/8`, `/16`, `/24`, etc. It introduces flexibility but also complexity. Here are some potential reasons why such a mask might be used:
+
+1.  **Custom Subnetting Needs**: An organization may require a network size that doesn't fit neatly into standard subnet boundaries. For example, they might need exactly 16,382 usable addresses, making a `/18` mask a suitable choice.
+    
+2.  **Optimizing Address Space**: In scenarios where IP address allocation must be efficient, custom subnetting allows the administrator to avoid wasting address space. Using something like `255.255.10.0` enables more granular control over the network size.
+    
+3.  **Network Segmentation**: An organization might need to segment its network into subnets that don’t adhere to typical class boundaries. By using a non-standard subnet mask, the administrator can tailor the subnet sizes to the specific needs of different departments, geographical locations, or other criteria.
+    
+
+#### 2.3.4.4 Analysis of Binary Subnetting
+
+In cases like `255.255.10.0`, the key insight is that subnet masks need not be contiguous, though this breaks with traditional methods. The network portion in this example spans into the third octet but doesn't fully capture it, leaving part of it for hosts. This kind of flexibility can create non-obvious subnet divisions, but once the number of bits (in CIDR notation) is understood, the same principles of subnetting apply.
+
+#### 2.3.4.5 Conclusion
+
+Non-standard subnet masks like `255.255.10.0` offer flexible and custom subnetting options, though they introduce complexity that requires careful calculation. By understanding how to interpret these masks, particularly by converting them into binary and identifying the number of `1`s, network administrators can optimize IP address allocation for specific use cases.
+
+* * *
+
+Here’s a section on how to determine the broadcast IP for both standard and non-standard subnet masks, which you can add to your document:
+
+* * *
+
+### 2.3.5 Determining the Broadcast IP for Standard and Non-Standard Subnet Masks
+
+The **broadcast IP address** is used to send data to all hosts within a subnet. It is always the last IP address in a subnet, where all bits in the host portion are set to `1`. This section will walk through the process of calculating the broadcast address for both standard and non-standard subnet masks.
+
+#### 2.3.5.1 Understanding the Broadcast Address
+
+The **broadcast address** is a special address reserved to target all devices on a network. In any subnet, the broadcast address is derived by setting all the bits in the host portion of the IP address to `1`. This address signifies the end of the range for a given subnet.
+
+#### 2.3.5.2 Steps to Calculate the Broadcast Address
+
+1.  **Convert the IP Address and Subnet Mask to Binary**:
+    
+    *   Convert both the IP address and the subnet mask to their binary equivalents.
+2.  **Identify the Network Portion**:
+    
+    *   The subnet mask will tell you which part of the IP address belongs to the network. The bits corresponding to the network portion will remain unchanged.
+3.  **Set All Host Bits to `1`** :
+    
+    *   Replace all bits in the host portion of the IP address with `1`s. This will give you the broadcast address.
+4.  **Convert the Resulting Binary Address Back to Decimal**:
+    
+    *   Convert the binary broadcast address back to the standard decimal format.
+
+#### 2.3.5.3 Broadcast Address for Standard Subnet Masks
+
+Let's calculate the broadcast address for a standard subnet mask using the example `192.168.1.0/24`:
+
+*   **IP Address**: `192.168.1.0`
+*   **Subnet Mask**: `255.255.255.0` (or `/24`)
+
+##### Step-by-Step Process:
+
+1.  **Convert IP Address and Subnet Mask to Binary**:
+    
+    *   IP Address (`192.168.1.0`): `11000000.10101000.00000001.00000000`
+    *   Subnet Mask (`255.255.255.0`): `11111111.11111111.11111111.00000000`
+2.  **Determine the Network and Host Portions**:
+    
+    *   The first 24 bits are for the network (`11000000.10101000.00000001`), and the last 8 bits are for the host (`00000000`).
+3.  **Set All Host Bits to `1`** :
+    
+    *   Set the last 8 bits (host portion) to `1`: `11000000.10101000.00000001.11111111`.
+4.  **Convert Back to Decimal**:
+    
+    *   `11000000.10101000.00000001.11111111` = `192.168.1.255`
+
+##### Broadcast Address:
+
+*   The broadcast address for `192.168.1.0/24` is `192.168.1.255`.
+
+#### 2.3.5.4 Broadcast Address for Non-Standard Subnet Masks
+
+Now let’s consider the case of a non-standard subnet mask, such as `255.255.10.0` (or `/18`).
+
+##### Example:
+
+*   **IP Address**: `192.168.0.0`
+*   **Subnet Mask**: `255.255.10.0` (or `/18`)
+
+##### Step-by-Step Process:
+
+1.  **Convert IP Address and Subnet Mask to Binary**:
+    
+    *   IP Address (`192.168.0.0`): `11000000.10101000.00000000.00000000`
+    *   Subnet Mask (`255.255.10.0`): `11111111.11111111.00001010.00000000`
+2.  **Determine the Network and Host Portions**:
+    
+    *   The first 18 bits are for the network (`11000000.10101000.00`), and the remaining 14 bits are for the host portion (`00000000.000000`).
+3.  **Set All Host Bits to `1`** :
+    
+    *   The host portion (`00000000.000000`) becomes `11111111.111111`.
+    
+    Now, we combine the network portion and the modified host portion:
+    
+    *   `11000000.10101000.00111111.11111111`.
+4.  **Convert Back to Decimal**:
+    
+    *   `11000000.10101000.00111111.11111111` = `192.168.63.255`
+
+##### Broadcast Address:
+
+*   The broadcast address for `192.168.0.0/18` is `192.168.63.255`.
+
+#### 2.3.5.5 Practical Examples
+
+To reinforce the understanding of broadcast addresses for different subnet masks, let’s consider a few more examples:
+
+1.  **For a `/16` Subnet Mask (e.g., 172.16.0.0/16)**:
+    
+    *   **IP Address**: `172.16.0.0`
+    *   **Subnet Mask**: `255.255.0.0`
+    *   **Network Portion**: First 16 bits.
+    *   **Host Portion**: Last 16 bits.
+    *   **Broadcast Address**: The broadcast address is `172.16.255.255` (all host bits set to `1`).
+2.  **For a `/28` Subnet Mask (e.g., 192.168.1.0/28)**:
+    
+    *   **IP Address**: `192.168.1.0`
+    *   **Subnet Mask**: `255.255.255.240`
+    *   **Network Portion**: First 28 bits.
+    *   **Host Portion**: Last 4 bits.
+    *   **Broadcast Address**: The broadcast address is `192.168.1.15`.
+
+#### 2.3.5.6 Summary of Key Concepts
+
+*   **Broadcast Address**: The last IP address in any subnet, with all host bits set to `1`.
+*   **Steps to Calculate**:
+    1.  Convert the IP address and subnet mask to binary.
+    2.  Identify the network and host portions.
+    3.  Set all host bits to `1` to determine the broadcast address.
+    4.  Convert the result back to decimal.
+*   **Non-Standard Masks**: Follow the same method, paying attention to where the network and host portions break.
+
+By following these steps, network administrators can easily calculate the broadcast address for any subnet, whether it uses a standard or non-standard subnet mask.
+
+* * *
+
+
 ### 2.4 Routing and Forwarding in IP
 
 Routing and forwarding are two fundamental operations that IP performs to move packets from a source to a destination. **Routing** is the process of determining the path that a packet will take through the network, while **forwarding** is the actual movement of packets from one network interface to another based on the routing decisions.
